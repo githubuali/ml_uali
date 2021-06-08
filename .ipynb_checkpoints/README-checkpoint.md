@@ -1,15 +1,15 @@
 # Machine Learning - UALI
 
-Este repositorio centraliza todo el contenido del proyecto de detección de objetos en imagenes aereas con el uso de CNN.
+Este repositorio centraliza todo el contenido del proyecto, para la detección de objetos en imagenes aereas con el uso de CNN.
 
 ## Documentación
+
+Toda la documentación se ingresa con permiso.
 
 1. [Planificación general del proyecto (abril_2021)](https://drive.google.com/file/d/1bMuCR1LKOgmpmQsZwPuTdjEPNApDvzgN/view?usp=sharing)
 2. [Apunte -Investigación y estudio del estado del arte](https://docs.google.com/document/d/1mygFBACNOq0p7MN__wcEl8sxGZEG187TV8vuhzMOjeU/edit?usp=sharing)
     1. [Resumen de la investigación](https://docs.google.com/spreadsheets/d/1atzYZL8IrZ4RDQQDC8rHAR0ydo9VwBXqHv8p4fDXsVo/edit?usp=sharing)
     2. [Links de interes](https://docs.google.com/document/d/1T_ZZ26vpcQTAqynuSMu--mj9A2ZRGAsa9byyAC6NLPk/edit?usp=sharing)
-    
-> Toda la documentación se ingresa con permiso.
 
 ## Data pipeline
 

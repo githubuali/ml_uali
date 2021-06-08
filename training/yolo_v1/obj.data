@@ -2,4 +2,4 @@ classes = 6
 train = data/train.txt
 valid = data/test.txt
 names = data/obj.names
-backup = /content/checkpoints
+backup = /content/drive/MyDrive/ml_uali/training/yolo_v1/checkpoints

@@ -10,8 +10,11 @@ Este repositorio centraliza todo el contenido del proyecto de detección de obje
     2. [Links de interes](https://docs.google.com/document/d/1T_ZZ26vpcQTAqynuSMu--mj9A2ZRGAsa9byyAC6NLPk/edit?usp=sharing)
     
 > Toda la documentación se ingresa con permiso.
-
+(
 ## Data pipeline
+
+En el siguiente gráfico se presenta el **data flow** pensado para desplegar en [IBM Cloud](https://dataplatform.cloud.ibm.com)
+![](img/dataPipeline.jpg)
 
 ## Notebooks
 
@@ -23,6 +26,7 @@ Este repositorio centraliza todo el contenido del proyecto de detección de obje
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 | [yolo_v1][1] | yoloV4_darknet | [Darknet/AlexeyAB][2] | [yolov4.conv.137][3] | [openImage_v1][4] | [obj.data](training/yolo_v1/obj.data) [obj.name](training/yolo_v1/obj.names) [yolov4-obj.cfg](training/yolo_v1/yolov4-obj.cfg)| [yolov4-obj_best.weights](https://drive.google.com/file/d/1-5eprW8D2Si3gZOqaN4QadHOFhvu6OWT/view?usp=sharing) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)][5] | | 🟡 | jun_2021 |
 
+https://colab.research.google.com/github/ml_uali/tree/main/notebooks/yolo_v1.ipynb
 ### Status
 🔴: Untrained <br>
 🟡: Training <br>

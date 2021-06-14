@@ -14,6 +14,7 @@ Este repositorio centraliza todo el contenido del proyecto de detección de obje
 ## Data pipeline
 
 En el siguiente gráfico se presenta el **data flow** pensado para desplegar en [IBM Cloud](https://dataplatform.cloud.ibm.com)
+
 ![](img/dataPipeline.jpg)
 
 ## Notebooks
@@ -24,20 +25,21 @@ En el siguiente gráfico se presenta el **data flow** pensado para desplegar en 
 
 | Nombre | Modelo | Framework | Pre-weights | Custom_Dataset | obj.data obj.name cfg | best weights | Notebook | MaP | Status | Fecha |
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| [yolo_v1][1] | yoloV4_darknet | [Darknet/AlexeyAB][2] | [yolov4.conv.137][3] | [openImage_v1][4] | [obj.data](training/yolo_v1/obj.data) [obj.name](training/yolo_v1/obj.names) [yolov4-obj.cfg](training/yolo_v1/yolov4-obj.cfg)| [yolov4-obj_best.weights](https://drive.google.com/file/d/1-5eprW8D2Si3gZOqaN4QadHOFhvu6OWT/view?usp=sharing) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)][5] | | 🟡 | jun_2021 |
+| [yolo_v1][1] | yoloV4_darknet | [Darknet/AlexeyAB][2] | [yolov4.conv.137][3] | [openImage_v1][4] | [obj.data](training/yolo_v1/obj.data) [obj.name](training/yolo_v1/obj.names) [yolov4-obj.cfg](training/yolo_v1/yolov4-obj.cfg)| [yolov4-obj_best.weights](https://drive.google.com/file/d/1-5eprW8D2Si3gZOqaN4QadHOFhvu6OWT/view?usp=sharing) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)][5] | 54% | 🟢 | jun_2021 |
 
-https://colab.research.google.com/github/ml_uali/tree/main/notebooks/yolo_v1.ipynb
 ### Status
 🔴: Untrained <br>
 🟡: Training <br>
 🟢: Trained <br>
+
+https://colab.research.google.com/github/maxiyommi/signal-systems/blob/master/material_extra/Filtros/intro_filtros.ipynb (editado) 
 
 <!-- links -->
 [1]: https://drive.google.com/drive/folders/1K6glWO0ZXqZ0hVTCdxM3BoYG1wQyXV8A?usp=sharing
 [2]: https://github.com/AlexeyAB/darknet
 [3]: https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.conv.137
 [4]: https://drive.google.com/drive/folders/1RPxQnrn9OMLv4ejEo9PX2VDYn4ynoDks?usp=sharing
-[5]: https://colab.research.google.com/drive/19cKCrw1YSU1J2wrA9pqpJsMsuqMK8PpQ?usp=sharing
+[5]: https://colab.research.google.com/drive/19cKCrw1YSU1J2wrA9pqpJsMsuqMK8PpQ?usp=sharing{:target="_blank"}
 
 ## Modelos
 
@@ -75,4 +77,23 @@ Datasets implementados/pendientes, para las *custom layers*.
 
 ### Uso de los datasets
 
-##
+## Inference
+
+
+| Nombre | Notebook | 
+|:--:|:--:|
+| Yolo | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)][10]          | 
+
+
+
+
+
+
+
+<!-- links -->
+[1]: https://drive.google.com/drive/folders/1K6glWO0ZXqZ0hVTCdxM3BoYG1wQyXV8A?usp=sharing
+[2]: https://github.com/AlexeyAB/darknet
+[3]: https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.conv.137
+[4]: https://drive.google.com/drive/folders/1RPxQnrn9OMLv4ejEo9PX2VDYn4ynoDks?usp=sharing
+[5]: https://colab.research.google.com/drive/19cKCrw1YSU1J2wrA9pqpJsMsuqMK8PpQ?usp=sharing{:target="_blank"}
+[10]: https://colab.research.google.com/drive/19cKCrw1YSU1J2wrA9pqpJsMsuqMK8PpQ?usp=sharing{:target="_blank"}

@@ -2,3 +2,6 @@ __pycache__/
 .env
 .vscode
 .ipynb_checkpoints
+notebooks/darknet
+*.weights
+notebooks/data_training

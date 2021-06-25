@@ -22,7 +22,7 @@ En el siguiente gráfico se presenta el **data flow** pensado para desplegar en 
 * [Storage de notebooks](https://drive.google.com/drive/folders/15F2JkUutHZ6INLlFT_il6N-bGxbxq3TJ?usp=sharing)
 
 
-## Status
+
 🔴: Untrained <br>
 🟡: Training <br>
 🟢: Trained <br>
@@ -50,9 +50,18 @@ Datasets implementados/pendientes, para las *custom layers*.
 |  Nombre | Fecha | Origen de imagenes | Categorias (test)(val) | Distribución | Formato | +Info |
 |:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|
 | [openImage_v1][1] | mayo_2021  | [Open Image Dataset V6][2]  | Car(3000)(600) Truck(2916)(254) Person(2902)(584) Vehicle(2968)(463) Van(2825)(112) Motorcycle(2885)(110)  |  train(80%) validation (20%)  | YoloV4-Darknet  |   |   
-
+| [visDrone][3] | junio_2021  | [visDrone2021][4]  | Pedestrian, People, Bicycle, Car, Van, Truck, Tricycle, Awning-tricycle, Bus , Motor, Others  |  train(80%) validation (20%)  | YoloV4-Darknet  | Falta el balance. Buscar en [este trabajo][5]  |
 
 * [Recopilación y etiquetado de un conjunto de datos personalizado](docs/custom_datasets.md)
+
+<!-- links -->
+[1]: https://drive.google.com/drive/folders/1RPxQnrn9OMLv4ejEo9PX2VDYn4ynoDks?usp=sharing
+[2]: https://storage.googleapis.com/openimages/web/index.html
+[3]: https://drive.google.com/drive/folders/1oJ0vg-p2dGxlExGEuK8kAqGQmkdphPDd?usp=sharing
+[4]: http://aiskyeye.com/download/
+[5]: https://openaccess.thecvf.com/content_ECCVW_2018/papers/11133/Zhu_VisDrone-DET2018_The_Vision_Meets_Drone_Object_Detection_in_Image_Challenge_ECCVW_2018_paper.pdf
+
+### Uso de los datasets
 
 
 ## Inference

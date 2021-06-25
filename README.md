@@ -10,7 +10,7 @@ Este repositorio centraliza todo el contenido del proyecto de detección de obje
     2. [Links de interes](https://docs.google.com/document/d/1T_ZZ26vpcQTAqynuSMu--mj9A2ZRGAsa9byyAC6NLPk/edit?usp=sharing)
     
 > Toda la documentación se ingresa con permiso.
-(
+
 ## Data pipeline
 
 En el siguiente gráfico se presenta el **data flow** pensado para desplegar en [IBM Cloud](https://dataplatform.cloud.ibm.com)
@@ -22,16 +22,18 @@ En el siguiente gráfico se presenta el **data flow** pensado para desplegar en 
 * [Storage de notebooks](https://drive.google.com/drive/folders/15F2JkUutHZ6INLlFT_il6N-bGxbxq3TJ?usp=sharing)
 
 
-### Status
+## Status
 🔴: Untrained <br>
 🟡: Training <br>
 🟢: Trained <br>
 
 ## Training
 
-| Nombre | Modelo | Framework | Pre-weights | Custom_Dataset | obj.data obj.name cfg | best weights | Notebook | MaP | Status | Fecha |
+Para el entrenamiento se utiliza los servicios de GPU Google/IBM usando el **Notebook training** (Google Drive), finalizado el entrenamiento se guarda el notebook en GitHub.
+
+| Nombre | Modelo | Framework | Pre weights | Custom dataset | Data training | Best weights | Notebook training | MaP | Status | Fecha |
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| [yolo_v1][1] | yoloV4_darknet | [Darknet/AlexeyAB][2] | [yolov4.conv.137][3] | [openImage_v1][4] | [obj.data](training/yolo_v1/obj.data) [obj.name](training/yolo_v1/obj.names) [yolov4-obj.cfg](training/yolo_v1/yolov4-obj.cfg)| [yolov4-obj_best.weights](https://drive.google.com/file/d/1-5eprW8D2Si3gZOqaN4QadHOFhvu6OWT/view?usp=sharing) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)][5] | 54% | 🟢 | jun_2021 |
+| [yolo_v1][1] | yoloV4_darknet | [Darknet/AlexeyAB][2] | [yolov4.conv.137][3] | [openImage_v1][4] | [data_training.zip (obj.data-obj.name-.cfg)](training/yolo_v1/data_training.zip) | [yolov4-obj_best.weights](https://drive.google.com/file/d/1-5eprW8D2Si3gZOqaN4QadHOFhvu6OWT/view?usp=sharing) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)][5] | 54% | 🟢 | jun_2021 |
 
 ## Modelos
 
@@ -52,33 +54,34 @@ Datasets implementados/pendientes, para las *custom layers*.
 
 * [Recopilación y etiquetado de un conjunto de datos personalizado](docs/custom_datasets.md)
 
-<!-- links -->
-[1]: https://drive.google.com/drive/folders/1RPxQnrn9OMLv4ejEo9PX2VDYn4ynoDks?usp=sharing
-[2]: https://storage.googleapis.com/openimages/web/index.html
-
-### Uso de los datasets
 
 ## Inference
 
+Para probar los modelos e inferir resultados no es necesario contar con GPU, se puede ejecutar los notebooks localmente
 
 | Nombre | Notebook | 
 |:--:|:--:|
-| Yolo | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)][10] | 
+| Yolo | [yolo_inference.ipynb](inference/yolo_inference.ipynb) | 
 
 
+## API
 
 
 <!-- links -->
-[1]: https://drive.google.com/drive/folders/1K6glWO0ZXqZ0hVTCdxM3BoYG1wQyXV8A?usp=sharing
+[1]: training/yolo_v1/yolo_v1_trained.ipynb
 [2]: https://github.com/AlexeyAB/darknet
 [3]: https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.conv.137
 [4]: https://drive.google.com/drive/folders/1RPxQnrn9OMLv4ejEo9PX2VDYn4ynoDks?usp=sharing
-[5]: https://colab.research.google.com/github/githubuali/ml_uali/blob/main/notebooks/yolo_v1.ipynb
+[5]: https://colab.research.google.com/drive/1a_jDWLM5hiFwDmD6CZGfxhtl5Biyj501?usp=sharing
+
+
 [6]: https://colab.research.google.com/drive/1mixbM9j1M7hGIWpmeEikW0_-dmV_o3R0?usp=sharing
 [7]: https://paperswithcode.com/method/cspdarknet53
-
 [8]: https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights
 [9]: https://github.com/AlexeyAB/darknet
 [10]: https://paperswithcode.com/method/cspdarknet53
 [11]: https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Redmon_You_Only_Look_CVPR_2016_paper.pdf
 
+<!-- links -->
+[1]: https://drive.google.com/drive/folders/1RPxQnrn9OMLv4ejEo9PX2VDYn4ynoDks?usp=sharing
+[2]: https://storage.googleapis.com/openimages/web/index.html

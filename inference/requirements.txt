@@ -1,0 +1,3 @@
+# librerias
+pip install opencv-python
+

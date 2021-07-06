@@ -5,3 +5,4 @@ __pycache__/
 inference/darknet
 *.weights
 inference/data_training
+inference/eventos

@@ -7,5 +7,7 @@ inference/darknet
 inference/data_training
 inference/eventos
 inference/yolo_inference
-training/yolo/yolo_training
-training/yolo/darknet
+training/yolo_v2/yolo_training
+training/yolo_v2/darknet
+training/yolo_v2/checkpoints
+training/yolo_v2/pre_training

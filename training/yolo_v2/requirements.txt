@@ -1,4 +1,5 @@
 # librerias
 opencv-python
+matplotlib
 
 

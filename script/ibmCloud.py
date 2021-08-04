@@ -1,16 +1,31 @@
 from logging import exception
 import os
+import sys
 from botocore.config import Config
 import ibm_boto3
 from ibm_botocore.client import Config, ClientError
+from dotenv import load_dotenv
 
-COS_ENDPOINT = "https://s3.us-south.cloud-object-storage.appdomain.cloud"
-COS_API_KEY_ID = "iXZodzfjKg0tjpEBKXgkIEr4SdSU6JCpotFkHpAkCSdf"
-COS_INSTANCE_CRN = "crn:v1:bluemix:public:iam-identity::a/84c0cb9f8c5348c7955d1cd9631ec63b::serviceid:ServiceId-e6be485f-2205-482b-964d-fd03c810945a"
-COS_STORAGE_CLASS = "us-south"
-COS_AUTH_ENDPOINT = "https://iam.cloud.ibm.com/identity/token"
-SERVICE_INTANCE_ID = "crn:v1:bluemix:public:cloud-object-storage:global:a/84c0cb9f8c5348c7955d1cd9631ec63b:16623d92-4943-4b41-af8a-e4b1d4c4132f::"
+project_folder = os.path.expanduser('~/ml_uali/script')  # adjust as appropriate
+load_dotenv(os.path.join(project_folder, '.env'))
 
+COS_ENDPOINT = os.getenv("COS_ENDPOINT")
+COS_API_KEY_ID = os.getenv("COS_API_KEY_ID")
+COS_INSTANCE_CRN = os.getenv("COS_INSTANCE_CRN")
+COS_STORAGE_CLASS = os.getenv("COS_STORAGE_CLASS")
+COS_AUTH_ENDPOINT = os.getenv("COS_AUTH_ENDPOINT")
+SERVICE_INTANCE_ID = os.getenv("SERVICE_INTANCE_ID")
+
+
+def progress(count, total, status=''):
+    bar_len = 60
+    filled_len = int(round(bar_len * count / float(total)))
+
+    percents = round(100.0 * count / float(total), 1)
+    bar = '=' * filled_len + '-' * (bar_len - filled_len)
+
+    sys.stdout.write('[%s] %s%s ...%s\r' % (bar, percents, '%', status))
+    sys.stdout.flush()  # As suggested by Rom Ruben (see: http://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console/27871113#comment50529068_27871113)
 
 def configInstance():
     """
@@ -84,16 +99,17 @@ def downloadFiles(cos, bucketName, keys, path):
     print('Downloading files')
 
     try:
-        dir = os.path.join(os.getcwd(), path)
-        print(dir)
-        if not os.path.exists(os.path.dirname(dir)):
+        dir = path
+        if not os.path.exists(dir):
             os.makedirs(dir)
-
+        i = 0
         for k in keys:
+            progress(i, len(keys), status='Descarga en progreso')
             print("Starting download of file {0}".format(k))
             cos.download_file(bucketName, k, os.path.join(dir, k))
             print("{0} donwloaded".format(k))
-
+            i += 1
+            
         print('All files downloaded.')
     except KeyboardInterrupt:
         print('Interrupted')
@@ -102,13 +118,17 @@ def downloadFiles(cos, bucketName, keys, path):
         except SystemExit:
             os._exit(0)
 
-
 if __name__ == "__main__":
+    
+    prefix = '22062021'
+    
+    download_path = '/home/maximiliano/ml_uali/inference/eventos/' +  prefix
+    
     cos = configInstance()
 
     buckets = getBuckets(cos)
     
-    keys = getObjectsNames(cos, buckets[0], '22062021')
-
-    downloadFiles(cos, buckets[0], keys, 'descargas')
+    keys = getObjectsNames(cos, buckets[0], prefix)
+    
+    downloadFiles(cos, buckets[0], keys, download_path)
 

@@ -1,7 +1,8 @@
 # librerias
 opencv-python
+python-dotenv
 
-# nuevas
+# Librerias para uso de ibmCloud
 boto3==1.18.9
 botocore==1.21.9
 certifi==2021.5.30

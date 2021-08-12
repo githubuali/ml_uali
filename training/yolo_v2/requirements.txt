@@ -1,5 +1,7 @@
 # librerias
 opencv-python
 matplotlib
+numpy
+tqdm
 
 

@@ -1,29 +1,14 @@
-'''
-VisDrone for object detection in images format 
-    Format: <bbox_left>,<bbox_top>,<bbox_width>,<bbox_height>,<score>,<object_category>,<truncation>,<occlusion>
-        - <bbox_left>	The x coordinate of the top-left corner of the predicted object bounding box
-        - <bbox_top>	The y coordinate of the top-left corner of the predicted object bounding box
-        - <bbox_width>	The width in pixels of the predicted object bounding box
-        - <bbox_height>	The height in pixels of the predicted object bounding box
-        - <score>	The score in the DETECTION result file indicates the confidence of the predicted bounding 
-                    box enclosing an object instance.The score in GROUNDTRUTH file is set to 1 or 0. 
-                    1 indicates the bounding box is considered in evaluation, while 0 indicates the bounding box will be ignored.
-        - <object_category>	The object category indicates the type of annotated object, 
-                    (i.e., ignored regions (0), pedestrian (1), people (2), bicycle (3), car (4), van (5), 
-                    truck (6), tricycle (7), awning-tricycle (8), bus (9), motor (10), others (11))
-        - <truncation>	The score in the DETECTION result file should be set to the constant -1. 
-                    The score in the GROUNDTRUTH file indicates the degree of object parts appears outside a frame 
-                    (i.e., no truncation = 0 (truncation ratio 0%), and partial truncation = 1(truncation ratio 1% ∼ 50%)).
-        - <occlusion>	The score in the DETECTION result file should be set to the constant -1. 
-                        The score in the GROUNDTRUTH file indicates the fraction of objects being occluded 
-                        (i.e., no occlusion = 0 (occlusion ratio 0%), partial occlusion = 1(occlusion ratio 1% ∼ 50%), 
-                        and heavy occlusion = 2 (occlusion ratio 50% ~ 100%))  
-    e.g: 685,463,110,65,1,4,0,0
+# -*- coding: utf-8 -*-
 
-Yolo Darknet format
-    Format:  <object_category> <bbox_left> <bbox_top> <bbox_width> <bbox_height>
-    e.g: 0 0.6137131875 0.502305 0.772029 0.376537
-'''
+"""
+visdroneToYolo is a script to transform the labels from one dataset to another
+
+##################################################
+## Author: Maxi
+## Version: 0.1
+## Status: developing
+##################################################
+"""
 
 import numpy as np
 import glob
@@ -35,7 +20,14 @@ import matplotlib.pyplot as plt
 abs_path = os.path.dirname(os.path.abspath(__file__))
 
 def getImageDim (path):
-    """
+    """ 
+
+    Arg:
+
+    Returns: 
+
+    Example:
+
     """
     
     images_paths = sorted(glob.glob(path + "/*.jpg"))
@@ -47,7 +39,14 @@ def getImageDim (path):
     return np.array(imagesDim) 
 
 def getAnnotations(path):
-    """
+    """ 
+
+    Arg:
+
+    Returns: 
+
+    Example:
+
     """  
 
     paths_annos = sorted(glob.glob(path+ "/*.txt"))
@@ -58,7 +57,14 @@ def getAnnotations(path):
     return np.array(anno_list), paths_annos
 
 def visDroneToYolo (path_images, path_annos):
-    """
+    """ 
+
+    Arg:
+
+    Returns: 
+
+    Example:
+
     """
 
     imagesDim = getImageDim (path_images)
@@ -80,7 +86,16 @@ def visDroneToYolo (path_images, path_annos):
         np.savetxt(path_annos, annos[i], delimiter=" ", fmt='%f')
 
 def drawBoundingBox_visDrone(image, annotation, object_category):
-    
+    """ 
+
+    Arg:
+
+    Returns: 
+
+    Example:
+
+    """
+
     img = cv2.imread(image)
     image_h, image_w, _  = img.shape
 
@@ -110,7 +125,14 @@ def drawBoundingBox_visDrone(image, annotation, object_category):
     return img 
 
 def drawBoundingBox_yolo(image, annotation, object_category):
-    """
+    """ 
+
+    Arg:
+
+    Returns: 
+
+    Example:
+
     """
     
     img = cv2.imread(image)
@@ -150,7 +172,14 @@ def drawBoundingBox_yolo(image, annotation, object_category):
     return img
 
 def test_visDroneToYolo ():
-    """
+    """ 
+
+    Arg:
+
+    Returns: 
+
+    Example:
+
     """
     
     image = "/home/max/Dropbox/Git/proyectos/UALI/ml_uali/script/VisDrone2019-DET-test-dev/images/0000006_00159_d_0000001.jpg"  
@@ -173,9 +202,9 @@ if __name__ == "__main__":
     path_images = abs_path + "/VisDrone2019-DET-test-dev/images"
     path_annos = abs_path + "/VisDrone2019-DET-test-dev/annotations"
     
-    #visDroneToYolo (path_images, path_annos)
+    visDroneToYolo (path_images, path_annos)
 
-    test_visDroneToYolo()
+    #test_visDroneToYolo()
 
 
     

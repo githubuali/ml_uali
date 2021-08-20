@@ -16,6 +16,7 @@ import cv2
 import os
 from tqdm import tqdm
 import matplotlib.pyplot as plt
+import random
 
 abs_path = os.path.dirname(os.path.abspath(__file__))
 
@@ -197,6 +198,32 @@ def test_visDroneToYolo ():
     ax.set_title('drawBoundingBox_visDrone')
     plt.show()
 
+def test_visDroneToYolo_randomPlot (path):
+    """ 
+
+    Arg:
+
+    Returns: 
+
+    Example:
+
+    """
+    
+    images = glob.glob(path + "/*.jpg")
+    random.shuffle(images)
+
+    image_path = images[0]
+    
+    folder, file = os.path.split(image_path)
+    annotation = file.replace(".jpg",".txt")
+    anotation_path = "/home/max/Dropbox/Git/proyectos/UALI/ml_uali/script/VisDrone2019-DET-test-dev/annotations/" + annotation
+    
+    object_category = ['ignored regions','pedestrian', 'people', 'bicycle', 'car', 'van', 'truck', 'tricycle', 'awning-tricycle', 'bus', 'motor', 'others'] # visDrone - Object detection in images
+
+    fig = plt.figure()
+    imgplot = plt.imshow(drawBoundingBox_yolo(image_path, anotation_path, object_category))
+    plt.show()
+
 if __name__ == "__main__":
 
     path_images = abs_path + "/VisDrone2019-DET-test-dev/images"
@@ -205,6 +232,8 @@ if __name__ == "__main__":
     visDroneToYolo (path_images, path_annos)
 
     #test_visDroneToYolo()
+
+    #test_visDroneToYolo_randomPlot(path_images)
 
 
     

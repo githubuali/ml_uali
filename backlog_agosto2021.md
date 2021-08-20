@@ -39,9 +39,9 @@
 - [x] Pasar todo al formato definido.
 - [x] Agregar docstring.
 - [x] Visualizar algunos ejemplos para corroborrar que son correctos.
-- [ ] Descargar dataset para "obj" y "test" (desde https://github.com/VisDrone/VisDrone-Dataset), modificar formato usando el script `visdroneToYolo.py`
-- [ ] Pasar etiquetas e imagenes en una misma carpeta.
-- [ ] Armar readme de dataset.
-- [ ] Subir material al GDrive.
-- [ ] armar "data_training.zip"
+- [x] Descargar dataset para "obj" y "test" (desde https://github.com/VisDrone/VisDrone-Dataset), modificar formato usando el script `visdroneToYolo.py`
+- [x] Pasar etiquetas e imagenes en una misma carpeta.
+- [x] Armar readme de dataset.
+- [x] Subir material al GDrive.
+- [x] armar "data_training.zip"
 

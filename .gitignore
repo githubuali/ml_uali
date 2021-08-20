@@ -12,3 +12,4 @@ training/yolo_v2/darknet
 training/yolo_v2/checkpoints
 training/yolo_v2/pre_training
 training/yolo_v2/data_training
+script/visdroneToYolo

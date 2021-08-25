@@ -5,11 +5,12 @@ visdroneToYolo is a script to transform the labels from one dataset to another
 
 ##################################################
 ## Author: Maxi
-## Version: 0.1
+## Version: 1.0
 ## Status: developing
 ##################################################
 """
 
+import warnings
 import numpy as np
 import glob
 import cv2
@@ -17,8 +18,37 @@ import os
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 import random
+import logging
 
 abs_path = os.path.dirname(os.path.abspath(__file__))
+
+def richMessage (message, Type):
+    """ 
+
+    Arg:
+
+    Returns: 
+
+    Example:
+
+    Reference: 
+        * Format color: https://stackoverflow.com/questions/287871/how-to-print-colored-text-to-the-terminal
+    """
+    
+    if Type == 'warning':
+        title = '[WARNING]'
+        color = ['\x1b[0;30;43m','\x1b[0m']
+
+    elif Type == 'error':   
+        title = '[ERROR]'
+        color = ['\x1b[0;30;41m','\x1b[0m']
+
+    else:
+        print ('undefined type !')
+
+    msj_Type = color[0] + title + color[1] + ' - '
+
+    return print(msj_Type + message)
 
 def getImageDim (path):
     """ 
@@ -34,8 +64,12 @@ def getImageDim (path):
     images_paths = sorted(glob.glob(path + "/*.jpg"))
     imagesDim = []
     for img in tqdm(images_paths, desc="Getting image dimensions"):
-        images = cv2.imread(img)
-        imagesDim.append ((images.shape[1],images.shape[0]))
+        try:
+            images = cv2.imread(img)
+            imagesDim.append ((images.shape[1],images.shape[0]))
+        except:
+                richMessage ('Converting valid annotations error, image: '+ paths_annos[i], 'warning')
+                continue
 
     return np.array(imagesDim) 
 
@@ -54,7 +88,7 @@ def getAnnotations(path):
 
     anno_list = []
     for anno_file in paths_annos:
-        anno_list.append(np.loadtxt(anno_file, dtype=np.float32, delimiter=",", usecols=(5,0,1,2,3)))
+        anno_list.append(np.loadtxt(anno_file, dtype=np.float32, delimiter=",", usecols=(5,0,1,2,3), ndmin=2))  # ndim = 2, for images with a single label
     return np.array(anno_list), paths_annos
 
 def visDroneToYolo (path_images, path_annos):
@@ -72,19 +106,33 @@ def visDroneToYolo (path_images, path_annos):
     annos, paths_annos = getAnnotations(path_annos)
 
     for i in tqdm(range(len(annos)), desc="Converting valid annotations"):
-        for j in range(len(annos[i])):
+        s = annos[i].shape
+        if len(s) == 1:
             try:
-                annos[i][j][1] = annos[i][j][1] + annos[i][j][3]/2
-                annos[i][j][2] = annos[i][j][2] + annos[i][j][4]/2
-                annos[i][j][1] /= imagesDim[i][0]
-                annos[i][j][2] /= imagesDim[i][1]
-                annos[i][j][3] /= imagesDim[i][0]
-                annos[i][j][4] /= imagesDim[i][1]
+                    annos[i][1] = annos[i][1] + annos[i][3]/2
+                    annos[i][2] = annos[i][2] + annos[i][4]/2
+                    annos[i][1] /= imagesDim[i][0]
+                    annos[i][2] /= imagesDim[i][1]
+                    annos[i][3] /= imagesDim[i][0]
+                    annos[i][4] /= imagesDim[i][1]
             except:
-                continue
-
+                    richMessage ('Converting valid annotations error, image: '+ paths_annos[i], 'warning')
+                    continue
+        elif len(s) == 2:
+            for j in range(len(annos[i])):
+                try:
+                    annos[i][j][1] = annos[i][j][1] + annos[i][j][3]/2
+                    annos[i][j][2] = annos[i][j][2] + annos[i][j][4]/2
+                    annos[i][j][1] /= imagesDim[i][0]
+                    annos[i][j][2] /= imagesDim[i][1]
+                    annos[i][j][3] /= imagesDim[i][0]
+                    annos[i][j][4] /= imagesDim[i][1]
+                except:
+                    richMessage ('Converting valid annotations error, image: '+ paths_annos[i], 'warning')
+                    continue
+   
     for i, path_annos in tqdm(enumerate(paths_annos), desc="Save new annotations"):
-        np.savetxt(path_annos, annos[i], delimiter=" ", fmt='%f')
+            np.savetxt(path_annos, annos[i], fmt='%d %f %f %f %f')
 
 def drawBoundingBox_visDrone(image, annotation, object_category):
     """ 
@@ -104,7 +152,6 @@ def drawBoundingBox_visDrone(image, annotation, object_category):
     boxes = fl.readlines()
     fl.close()
     
- 
     for box in boxes:
         # Split string to float
         bbox_left, bbox_top, bbox_width, bbox_height, _, c, _, _ = map(float, box.split(','))
@@ -114,7 +161,6 @@ def drawBoundingBox_visDrone(image, annotation, object_category):
         xmax = int(bbox_left + bbox_width)
         ymax = int(bbox_top + bbox_height)
         
-
         cv2.rectangle(img, (xmin,ymin), (xmax,ymax), (0,0,255), 1)
         cv2.putText(img, 
                     object_category[int(c)], 
@@ -216,7 +262,7 @@ def test_visDroneToYolo_randomPlot (path):
     
     folder, file = os.path.split(image_path)
     annotation = file.replace(".jpg",".txt")
-    anotation_path = "/home/max/Dropbox/Git/proyectos/UALI/ml_uali/script/VisDrone2019-DET-test-dev/annotations/" + annotation
+    anotation_path = "/home/max/Dropbox/Git/proyectos/UALI/ml_uali/script/VisDrone2019-DET-train/annotations/" + annotation
     
     object_category = ['ignored regions','pedestrian', 'people', 'bicycle', 'car', 'van', 'truck', 'tricycle', 'awning-tricycle', 'bus', 'motor', 'others'] # visDrone - Object detection in images
 
@@ -224,16 +270,29 @@ def test_visDroneToYolo_randomPlot (path):
     imgplot = plt.imshow(drawBoundingBox_yolo(image_path, anotation_path, object_category))
     plt.show()
 
+def test_richMessage ():
+
+    message = "/home/max/Dropbox/Git/proyectos/UALI/ml_uali/script/VisDrone2019-DET-test-dev/images/0000006_00159_d_0000001.jpg"  
+    Type = 'error'
+    richMessage (message, Type)
+
 if __name__ == "__main__":
+
+    logging.basicConfig(filename='myapp.log', format='%(asctime)s %(message)s', level=logging.INFO)
+    logging.info('Started')
 
     path_images = abs_path + "/VisDrone2019-DET-test-dev/images"
     path_annos = abs_path + "/VisDrone2019-DET-test-dev/annotations"
     
-    visDroneToYolo (path_images, path_annos)
+    #visDroneToYolo (path_images, path_annos)
+
+    # --- TESTS ---
 
     #test_visDroneToYolo()
-
     #test_visDroneToYolo_randomPlot(path_images)
+    test_richMessage ()
+    logging.info('Finished')
+
 
 
     

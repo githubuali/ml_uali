@@ -1,0 +1,6 @@
+COS_ENDPOINT = https://s3.us-south.cloud-object-storage.appdomain.cloud
+COS_API_KEY_ID = iXZodzfjKg0tjpEBKXgkIEr4SdSU6JCpotFkHpAkCSdf
+COS_INSTANCE_CRN = crn:v1:bluemix:public:iam-identity::a/84c0cb9f8c5348c7955d1cd9631ec63b::serviceid:ServiceId-e6be485f-2205-482b-964d-fd03c810945a
+COS_STORAGE_CLASS = us-south
+COS_AUTH_ENDPOINT = https://iam.cloud.ibm.com/identity/token
+SERVICE_INTANCE_ID = crn:v1:bluemix:public:cloud-object-storage:global:a/84c0cb9f8c5348c7955d1cd9631ec63b:16623d92-4943-4b41-af8a-e4b1d4c4132f::

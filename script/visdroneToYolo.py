@@ -288,10 +288,10 @@ if __name__ == "__main__":
 
     # --- TESTS ---
 
-    #test_visDroneToYolo()
+    test_visDroneToYolo()
     #test_visDroneToYolo_randomPlot(path_images)
-    test_richMessage ()
-    logging.info('Finished')
+    #test_richMessage ()
+    #logging.info('Finished')
 
 
 

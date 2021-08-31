@@ -22,5 +22,5 @@ VisDrone for object detection in images format
     e.g: 685,463,110,65,1,4,0,0
 
 Yolo Darknet format
-    Format:  <object_category> <bbox_left> <bbox_top> <bbox_width> <bbox_height>
+    Format:  <object_category> <bbox_x_center> <bbox_y_center> <bbox_width> <bbox_height>
     e.g: 0 0.6137131875 0.502305 0.772029 0.376537

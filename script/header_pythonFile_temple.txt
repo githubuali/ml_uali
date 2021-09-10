@@ -1,0 +1,6 @@
+# -*- coding: utf-8 -*-
+#
+# @Author: https://mecantronic.com.ar/
+# @Version: 1.0
+# @Date: sep2021
+# @Status: developing

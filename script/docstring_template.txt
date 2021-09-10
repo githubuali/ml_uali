@@ -1,0 +1,8 @@
+""" Returns environment variables 
+
+    Arg: 
+        path (string) : path of enviroment '.env' file.
+        
+    Returns: 
+        None
+"""

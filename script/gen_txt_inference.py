@@ -32,4 +32,6 @@ if __name__ == "__main__":
     
     download_path = '/home/maximiliano/ml_uali/inference/eventos/' +  prefix + '/'
     
+    test = '../inference/eventos/eventosDetectados_YPF'
+    
     gen_text (download_path)

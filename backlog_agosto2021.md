@@ -23,9 +23,9 @@
 
 **Roadmap**
 * Definir la la referencia a utilizar 
-    - [ ] Prueba medium (branch - medium).
+    - [x] Prueba medium (branch - medium).
         [Referencia](https://medium.com/analytics-vidhya/object-detection-using-yolo-v3-and-deploying-it-on-docker-and-minikube-c1192e81ae7a)
-    - [ ] Prueba pyimage (branch - pyimage).
+    - [x] Prueba pyimage (branch - pyimage).
         [Referencia](https://www.pyimagesearch.com/2018/11/12/yolo-object-detection-with-opencv/)
         
 ## Entrenamiento con Visdrone (branch - visdroneToYolo)

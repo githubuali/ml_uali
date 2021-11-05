@@ -61,7 +61,3 @@ if __name__ == "__main__":
     if "test" in input_json:
         download_drive(input_json["test"][0],"test", unzip=False)
         download_drive(input_json["test"][1],"test_annot",unzip=False)
-    
-
-    
-

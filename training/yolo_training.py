@@ -65,17 +65,6 @@ def data_purge(input):
     return None
 
 
-def modif_names(path, classes):
-    names = open(path).read().strip().split("\n")
-    for index in sorted(classes, reverse=True):
-        del names[index]
-    new_txt = "\n".join(names)
-    outfile = open(path,'w')
-    outfile.write(new_txt)
-    outfile.close()
-    return None
-    
-
 def download_drive(link, name, unzip=True):
     
     link = link.replace("/view?usp=sharing", "")
@@ -104,7 +93,7 @@ if __name__ == "__main__":
 
     """
 
-    #os.system("git clone https://github.com/AlexeyAB/darknet")
+    os.system("git clone https://github.com/AlexeyAB/darknet")
     with open("input.json") as json_file:
         input_json = json.load(json_file)
 

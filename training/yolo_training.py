@@ -93,21 +93,21 @@ if __name__ == "__main__":
 
     """
 
-    os.system("git clone https://github.com/AlexeyAB/darknet")
+    #os.system("git clone https://github.com/AlexeyAB/darknet")
     with open("input.json") as json_file:
         input_json = json.load(json_file)
 
-    download_drive(input_json["train"][0],"train") # Descargar las imagenes
-    download_drive(input_json["train"][1],"train_annot") # Descargar las anotaciones
+    #download_drive(input_json["train"][0],"train") # Descargar las imagenes
+    #download_drive(input_json["train"][1],"train_annot") # Descargar las anotaciones
 
-    if "valid" in input_json:
-        download_drive(input_json["valid"][0],"valid")
-        download_drive(input_json["valid"][1],"valid_annot")
+    #if "valid" in input_json:
+    #    download_drive(input_json["valid"][0],"valid")
+    #    download_drive(input_json["valid"][1],"valid_annot")
     #if "test" in input_json:
     #    download_drive(input_json["test"][0],"test", unzip=False)
     #    download_drive(input_json["test"][1],"test_annot",unzip=False)
 
-    input_json["training_files"] = input_json["training_files"].replace("/view?usp=sharing", "")
+    #input_json["training_files"] = input_json["training_files"].replace("/view?usp=sharing", "")
 
     os.system("""wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=""" + input_json["training_files"].split("/")[-1] + """' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*"""+ r"/\1\n/p')&id=" + input_json["training_files"].split("/")[-1] + '" -O '+ "training_files" +'.zip && rm -rf /tmp/cookies.txt')
 
@@ -120,9 +120,10 @@ if __name__ == "__main__":
 
     os.system("mkdir darknet/checkpoints")
 
-    data_purge(input_json)
+    #data_purge(input_json)
+    os.chdir("darknet/data")
     gen_txt("train")
     gen_txt("valid")
-    #os.system("wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.conv.137")
-    os.chdir("darknet/")
+    os.chdir("..")
+    os.system("wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.conv.137")
     os.system("sudo ./darknet detector train data/yolov4.data cfg/yolov4.cfg yolov4.conv.137 -dont_show -map")

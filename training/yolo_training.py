@@ -54,14 +54,14 @@ def remove_class(path, clases_elim):
 
 def data_purge(input):
     if "remove_class" in input:
-        remove_class("darknet/data/train_annot/train/", input["remove_class"])
-    os.system("cp -R darknet/data/train_annot/train/dataset_new/.  darknet/data/train/")
-    os.system("rm -rf darknet/data/train_annot")
+        remove_class("train/", input["remove_class"])
+    os.system("cp -R train/dataset_new/.  darknet/data/train/")
+    os.system("rm -rf train")
     if "valid" in input:
         if "remove_class" in input:
-            remove_class("darknet/data/valid_annot/valid/", input["remove_class"])
-        os.system("cp -R darknet/data/valid_annot/valid/dataset_new/. darknet/data/valid")
-        os.system("rm -rf darknet/data/valid_annot")
+            remove_class("valid/", input["remove_class"])
+        os.system("cp -R valid/dataset_new/. darknet/data/valid")
+        os.system("rm -rf valid")
     return None
 
 
@@ -81,8 +81,12 @@ def download_drive(link, name, unzip=True):
     link = link.replace("/view?usp=sharing", "")
     os.system("""wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=""" + link.split("/")[-1] + """' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*"""+ r"/\1\n/p')&id=" + link.split("/")[-1] + '" -O '+ name +'.zip && rm -rf /tmp/cookies.txt')
     if unzip==True:
-        os.system("unzip "+ name +".zip -d darknet/data/"+ name)
-        os.system("rm "+ name +".zip")
+        if name.endswith("annot"):
+            os.system("unzip "+ name +".zip")
+            os.system("rm "+ name +".zip")
+        else:
+            os.system("unzip "+ name +".zip -d darknet/data/")
+            os.system("rm "+ name +".zip")
     return None
 
 if __name__ == "__main__":
@@ -104,15 +108,11 @@ if __name__ == "__main__":
     with open("input.json") as json_file:
         input_json = json.load(json_file)
 
-    #download_drive(input_json["train"][0],"train")
-    #os.system("cp -R darknet/data/train/train/. darknet/data/train")
-    #os.system("rm -rf darknet/data/train/train")
-    #download_drive(input_json["train"][1],"train_annot")
-    
+    download_drive(input_json["train"][0],"train") # Descargar las imagenes
+    download_drive(input_json["train"][1],"train_annot") # Descargar las anotaciones
+
     if "valid" in input_json:
-        #download_drive(input_json["valid"][0],"valid")
-        os.system("cp -R darknet/data/valid/valid/. darknet/data/valid")
-        os.system("rm -rf darknet/data/valid/valid")
+        download_drive(input_json["valid"][0],"valid")
         download_drive(input_json["valid"][1],"valid_annot")
     #if "test" in input_json:
     #    download_drive(input_json["test"][0],"test", unzip=False)
@@ -132,7 +132,8 @@ if __name__ == "__main__":
     os.system("mkdir darknet/checkpoints")
 
     data_purge(input_json)
-    gen_txt()
+    gen_txt("train")
+    gen_txt("valid")
     #os.system("wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.conv.137")
     os.chdir("darknet/")
     os.system("sudo ./darknet detector train data/yolov4.data cfg/yolov4.cfg yolov4.conv.137 -dont_show -map")

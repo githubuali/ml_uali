@@ -1,0 +1,10 @@
+{
+    "train":["https://drive.google.com/file/d/1p_3-N9ju_Mcxe0djzL99kqkRG3AnT9Vw/view?usp=sharing","https://drive.google.com/file/d/1tvegWeKhll7bFA3hvORo8j5dTnBAQf6E/view?usp=sharing"],
+    "valid":["https://drive.google.com/file/d/1i0iVmdea7jo5Dezru6s96eLR7CWg4s3A/view?usp=sharing","https://drive.google.com/file/d/14EBbKNjGBf3F8Tw27XBLiKMslRBF5dAS/view?usp=sharing"],
+    "test":["https://drive.google.com/file/d/18Xcdm4rLBJailoWlUr--QmKVDyTvEVx4/view?usp=sharing","https://drive.google.com/file/d/15Lp8M5FoZV9aCat7rnOqqX2nht_hTyOo/view?usp=sharing"],
+    "training_files":"https://drive.google.com/file/d/1vjzMIrAR2JbNmj66BGvo5QOXKaMmnml9/view?usp=sharing",
+    "flags":"",
+    "dataset":"visdrone",
+    "version":"0.1",
+    "remove_class":[0,1,2,3,7,8,9,11]
+}

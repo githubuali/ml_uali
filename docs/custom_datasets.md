@@ -7,13 +7,7 @@ Esto se puede hacer de dos formas.
 1. Mediante el uso de imágenes de Google ya etiquetadas.
 2. La creación de su propio conjunto de datos y el uso de una herramienta de anotación para dibujar etiquetas manualmente (por ejemplo [labelImg](https://github.com/tzutalin/labelImg)). 
 
-## 1. Etiquetado manual de imagenes usando labelImg
-
-COMPLETAR
-
-https://github.com/tzutalin/labelImg
-https://www.aprendemachinelearning.com/deteccion-de-objetos-con-python-yolo-keras-tutorial/
-https://medium.com/voxel51/loading-open-images-v6-and-custom-datasets-with-fiftyone-18b5334851c3
+## 1. [Etiquetado manual de imagenes usando RoboFlow](https://github.com/githubuali/label_ml_uali)
 
 ## 2. Uso del conjunto de datos de imágenes abiertas de Google 
 

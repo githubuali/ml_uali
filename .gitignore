@@ -5,6 +5,7 @@ __pycache__/
 inference/darknet
 *.weights
 inference/data_training
+inference/train_1
 inference/eventos
 inference/yolo_inference
 training/yolo_v2/yolo_training
